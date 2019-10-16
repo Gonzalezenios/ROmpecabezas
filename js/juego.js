@@ -1,3 +1,5 @@
+var juegoIniciado = false;
+
 // Arreglo que contiene las intrucciones del juego 
 var instrucciones = [
   "Arriba",
@@ -50,6 +52,9 @@ function agregarUltimaDireccion(direccion) {
 /* Esta función va a chequear si el Rompecabezas esta en la posicion ganadora. 
 Existen diferentes formas de hacer este chequeo a partir de la grilla. */
 function chequearSiGano() {
+  if(juegoIniciado === false){
+    return false
+  }
   var grilla2 = [
     [1, 2, 3],
     [4, 5, 6],
@@ -72,7 +77,7 @@ function chequearSiGano() {
 mostrarCartelGanador();
 
 // Implementar alguna forma de mostrar un cartel que avise que ganaste el juego
-function mostrarCartelGanador(mensaje) {
+function mostrarCartelGanador() {
   if (chequearSiGano()) {
     Swal.fire({
       title: 'ERES GENIAL!!',
@@ -86,10 +91,12 @@ function mostrarCartelGanador(mensaje) {
       no-repeat
     `
     })
-  }else{
-    return
+  } else {
+    return false
   }
 }
+
+
 
 /* Función que intercambia dos posiciones en la grilla.
 Pensar como intercambiar dos posiciones en un arreglo de arreglos. 
@@ -102,6 +109,7 @@ En vez de intercambiar esos valores vamos a terminar teniendo en ambas posicione
 Se te ocurre cómo solucionar esto con una variable temporal?
 */
 function intercambiarPosicionesGrilla(filaPos1, columnaPos1, filaPos2, columnaPos2) {
+  // console.log("intercambiar posiciones grilla")
   var arr1 = grilla[filaPos1][columnaPos1]
   var arr2 = grilla[filaPos2][columnaPos2]
   grilla[filaPos2][columnaPos2] = arr1;
@@ -116,15 +124,28 @@ function actualizarPosicionVacia(nuevaFila, nuevaColumna) {
 
 // Para chequear si la posicón está dentro de la grilla.
 function posicionValida(fila, columna) {
+  // console.log("posicion valida")
   var filaUsuario = grilla[fila]
-  var columnaUsuario = grilla[columna]
-  if (filaUsuario !== fila) {
+  if (filaUsuario === undefined) {
+    // la fila no existe
     return false
-  } else if (columnaUsuario !== grilla) {
-    return false
-  } else {
-    return
   }
+
+  var casilleroUsuario = filaUsuario[columna]
+
+  if (casilleroUsuario === undefined) {
+    return false
+  }
+
+  return true
+  // var columnaUsuario = grilla[columna]
+  // if (filaUsuario !== fila) {
+  //   return false
+  // } else if (columnaUsuario !== grilla) {
+  //   return false
+  // } else {
+  //   return
+  // }
 }
 /* Movimiento de fichas, en este caso la que se mueve es la blanca intercambiando su posición con otro elemento.
 Las direcciones están dadas por números que representa: arriba (38), abajo (40), izquierda (37), derecha (39) */
@@ -161,6 +182,7 @@ function moverEnDireccion(direccion) {
   las funciones posicionValida, intercambiarPosicionesGrilla y actualizarPosicionVacia */
 
   if (posicionValida(nuevaFilaPiezaVacia, nuevaColumnaPiezaVacia)) {
+    // console.log("proxima posicion es valida")
     intercambiarPosiciones(filaVacia, columnaVacia, nuevaFilaPiezaVacia, nuevaColumnaPiezaVacia);
     actualizarPosicionVacia(nuevaFilaPiezaVacia, nuevaColumnaPiezaVacia);
 
@@ -306,6 +328,7 @@ presiona el usuario */
 function iniciar() {
   mostrarInstrucciones(instrucciones);
   mezclarPiezas(30);
+  juegoIniciado = true;
   capturarTeclas();
 }
 
