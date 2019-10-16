@@ -50,32 +50,55 @@ function agregarUltimaDireccion(direccion) {
 /* Esta función va a chequear si el Rompecabezas esta en la posicion ganadora. 
 Existen diferentes formas de hacer este chequeo a partir de la grilla. */
 function chequearSiGano() {
-  for (var i = 0; i < grilla.length; i++) {
+  /* for (var i = 0; i < grilla.length; i++) {
     for (var j = 0; j < grilla.length; j++) {
       var actual = grilla[i][j]
       var valorCelda = i * 3 + j + 1
       if (valorCelda !== actual) {
-        return false
+        return true
       }
     }
+  }
+}*/
+  var grilla2 = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+  ];
+  var contador = 0;
+  for (var i = 0; i < grilla.length; i++) {
+    for (var j = 0; j < grilla.length; j++) {
+      if (grilla2[i][j] != grilla[i][j]) {
+        contador++;
+      }
+    }
+  }
+  if (contador == 0) {
+    return true;
+  } else {
+    return false;
   }
 }
 mostrarCartelGanador();
 
 // Implementar alguna forma de mostrar un cartel que avise que ganaste el juego
 function mostrarCartelGanador(mensaje) {
-  Swal.fire({
-    title: 'ERES GENIAL!!',
-    width: 600,
-    padding: '3em',
-    background: '#fff url(https://sweetalert2.github.io/images/trees.png)',
-    backdrop: `
+  if (chequearSiGano()) {
+    Swal.fire({
+      title: 'ERES GENIAL!!',
+      width: 600,
+      padding: '3em',
+      background: '#fff url(https://sweetalert2.github.io/images/trees.png)',
+      backdrop: `
       rgba(0,0,123,0.4)
       url("https://sweetalert2.github.io/images/nyan-cat.gif")
       center left
       no-repeat
     `
-  })
+    })
+  }else{
+    return
+  }
 }
 
 /* Función que intercambia dos posiciones en la grilla.
@@ -109,7 +132,7 @@ function posicionValida(fila, columna) {
     return false
   } else if (columnaUsuario !== grilla) {
     return false
-   } else {
+  } else {
     return
   }
 }
@@ -121,13 +144,13 @@ function moverEnDireccion(direccion) {
 
   // Mueve pieza hacia la abajo, reemplazandola con la blanca
   if (direccion === codigosDireccion.ABAJO) {
-    nuevaFilaPiezaVacia = filaVacia - 1;
+    nuevaFilaPiezaVacia = filaVacia + 1;
     nuevaColumnaPiezaVacia = columnaVacia;
   }
 
   // Mueve pieza hacia arriba, reemplazandola con la blanca
   else if (direccion === codigosDireccion.ARRIBA) {
-    nuevaFilaPiezaVacia = filaVacia + 1;
+    nuevaFilaPiezaVacia = filaVacia - 1;
     nuevaColumnaPiezaVacia = columnaVacia;
   }
 
@@ -139,8 +162,8 @@ function moverEnDireccion(direccion) {
 
   // Mueve pieza hacia la izquierda, reemplazandola con la blanca
   else if (direccion === codigosDireccion.IZQUIERDA) {
-    nuevaColumnaPiezaVacia = columnaVacia + 1;
-    nuevaFilaPiezaVacia = filaVacia;  
+    nuevaColumnaPiezaVacia = columnaVacia - 1;
+    nuevaFilaPiezaVacia = filaVacia;
   }
 
   /* A continuación se chequea si la nueva posición es válida, si lo es, se intercambia. 
@@ -153,7 +176,7 @@ function moverEnDireccion(direccion) {
 
     //COMPLETAR: Agregar la dirección del movimiento al arreglo de movimientos
     agregarUltimaDireccion(direccion)
-    
+
   }
 }
 
