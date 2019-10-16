@@ -1,7 +1,7 @@
 /*Código armado por La Foca Loca S.A. No modificar*/
 body {
   font-family: Arial, sans-serif;
-  width: 940px;
+  width: 900px;
   margin: 5% auto;
   min-height: 100%;
   background-image: url(../images/adventure.jpg);
@@ -81,4 +81,10 @@ li::before {
 #titulo{
   text-shadow: 1px 1px #666, 2px 2px #86D6D3, 3px 3px #666, 4px 4px #86D6D3;
   color: #E84A5F;    
+}
+
+#footer{
+  text-align: center;
+  text-shadow: 1px 1px #666, 2px 2px #86D6D3, 3px 3px #666, 4px 4px #86D6D3;
+  color: #E84A5F;
 }
