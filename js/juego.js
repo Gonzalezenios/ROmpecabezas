@@ -10,7 +10,7 @@ var instrucciones = [
 
 
 // Arreglo para ir guardando los movimientos que se vayan realizando
-var movimientos = []
+var movimientos = [];
 
 
 
@@ -33,16 +33,16 @@ Para eso deberás usar la función ya implementada mostrarInstruccionEnLista().
 Podés ver su implementación en la ultima parte de este codigo. */
 function mostrarInstrucciones(instrucciones) {
   for (var i = 0; i < instrucciones.length; i++) {
-    var instruccion = instrucciones[i]
-    mostrarInstruccionEnLista(instruccion, "lista-instrucciones")
+    var instruccion = instrucciones[i];
+    mostrarInstruccionEnLista(instruccion, "lista-instrucciones");
   }
 }
 
 /* COMPLETAR: Crear función que agregue la última dirección al arreglo de movimientos
 y utilice actualizarUltimoMovimiento para mostrarlo en pantalla */
 function agregarUltimaDireccion(direccion) {
-  movimientos.push(direccion)
-  actualizarUltimoMovimiento(direccion)
+  movimientos.push(direccion);
+  actualizarUltimoMovimiento(direccion);
   // for (var i = 0; i < movimientos.length; i++) {
   //   var ultimaDireccion = movimientos[i]
   //   actualizarUltimoMovimiento(ultimaDireccion);
@@ -53,7 +53,7 @@ function agregarUltimaDireccion(direccion) {
 Existen diferentes formas de hacer este chequeo a partir de la grilla. */
 function chequearSiGano() {
   if(juegoIniciado === false){
-    return false
+    return false;
   }
   var grilla2 = [
     [1, 2, 3],
@@ -90,9 +90,9 @@ function mostrarCartelGanador() {
       center left
       no-repeat
     `
-    })
+    });
   } else {
-    return false
+    return false;
   }
 }
 
@@ -110,8 +110,8 @@ Se te ocurre cómo solucionar esto con una variable temporal?
 */
 function intercambiarPosicionesGrilla(filaPos1, columnaPos1, filaPos2, columnaPos2) {
   // console.log("intercambiar posiciones grilla")
-  var arr1 = grilla[filaPos1][columnaPos1]
-  var arr2 = grilla[filaPos2][columnaPos2]
+  var arr1 = grilla[filaPos1][columnaPos1];
+  var arr2 = grilla[filaPos2][columnaPos2];
   grilla[filaPos2][columnaPos2] = arr1;
   grilla[filaPos1][columnaPos1] = arr2;
 }
@@ -125,19 +125,19 @@ function actualizarPosicionVacia(nuevaFila, nuevaColumna) {
 // Para chequear si la posicón está dentro de la grilla.
 function posicionValida(fila, columna) {
   // console.log("posicion valida")
-  var filaUsuario = grilla[fila]
+  var filaUsuario = grilla[fila];
   if (filaUsuario === undefined) {
     // la fila no existe
-    return false
+    return false;
   }
 
-  var casilleroUsuario = filaUsuario[columna]
+  var casilleroUsuario = filaUsuario[columna];
 
   if (casilleroUsuario === undefined) {
-    return false
+    return false;
   }
 
-  return true
+  return true;
   // var columnaUsuario = grilla[columna]
   // if (filaUsuario !== fila) {
   //   return false
@@ -187,7 +187,7 @@ function moverEnDireccion(direccion) {
     actualizarPosicionVacia(nuevaFilaPiezaVacia, nuevaColumnaPiezaVacia);
 
     //COMPLETAR: Agregar la dirección del movimiento al arreglo de movimientos
-    agregarUltimaDireccion(direccion)
+    agregarUltimaDireccion(direccion);
 
   }
 }
@@ -213,7 +213,7 @@ var codigosDireccion = {
   ARRIBA: 38,
   DERECHA: 39,
   ABAJO: 40
-}
+};
 
 /* Funcion que realiza el intercambio logico (en la grilla) y ademas actualiza
 el intercambio en la pantalla (DOM). Para que funcione debera estar implementada
@@ -319,7 +319,7 @@ function capturarTeclas() {
       }
       evento.preventDefault();
     }
-  })
+  });
 }
 
 /* Se inicia el rompecabezas mezclando las piezas 60 veces 
